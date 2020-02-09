@@ -43,6 +43,8 @@ class Board
         @cups[cup_idx] << stones.pop
       end
     end
+    render
+    next_turn(cup_idx)
   end
 
   def next_turn(ending_cup_idx)
