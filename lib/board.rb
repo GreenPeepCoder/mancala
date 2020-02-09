@@ -24,17 +24,16 @@ class Board
   end
 
   def make_move(start_pos, current_player_name)
-    # empty chosen cup
+    # empties cup
     stones = @cups[start_pos]
     @cups[start_pos] = []
 
-    # distribute stones
+    # distributes stones
     cup_idx = start_pos
     until stones.empty?
       cup_idx += 1
-      cup_idx == 0 if cup_idx > 13
-
-      # place stones in correct player's store
+      cup_idx = 0 if cup_idx > 13
+      # places stones in the correct current player's cups
       if cup_idx == 6
         @cups[6] << stones.pop if current_player_name == @name1
       elsif cup_idx == 13
@@ -43,9 +42,11 @@ class Board
         @cups[cup_idx] << stones.pop
       end
     end
+
     render
     next_turn(cup_idx)
   end
+
 
   def next_turn(ending_cup_idx)
     # helper method to determine what #make_move returns
@@ -77,12 +78,14 @@ class Board
   end
 
   def winner
-    if @cups[6] == @cups[13]
-      return :draw
-    elsif @cups[6] > @cups[13]
-      return @name1
+    player1_count = @cups[6].count
+    player2_count = @cups[13].count
+
+    if player1_count == player2_count
+      :draw
     else
-      return @name2
+      player1_count > player2_count ? @name1 : @name2
     end
   end
+
 end
