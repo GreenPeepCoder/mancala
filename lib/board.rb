@@ -13,6 +13,7 @@ class Board
   end
 
   def valid_move?(start_pos)
+    raise Exception.new "Invalid starting cup" if start_pos.between?(0,13) == false
   end
 
   def make_move(start_pos, current_player_name)
