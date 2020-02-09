@@ -77,5 +77,12 @@ class Board
   end
 
   def winner
+    if @cups[6] == @cups[13]
+      return :draw
+    elsif @cups[6] > @cups[13]
+      return @name1
+    else
+      return @name2
+    end
   end
 end
